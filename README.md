@@ -28,3 +28,7 @@ $ npm start
 ```sh
 $ npm test
 ```
+## Deploy to Github page
+```sh
+$ npm run deploy
+```
