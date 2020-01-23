@@ -88,6 +88,12 @@ describe('updateDisplay', () => {
         expect(wrapper.state('displayValue')).toEqual('0');
     });
 
+    it('prevents showing only . when 0 as initial value', () => {
+        wrapper.instance().updateDisplay('0');
+        wrapper.instance().updateDisplay('.');
+        expect(wrapper.state('displayValue')).toEqual('0.5');
+    });
+
     it('removes last char of displayValue', () => {
         wrapper.instance().updateDisplay('5');
         wrapper.instance().updateDisplay('0');
@@ -160,7 +166,6 @@ describe('callOperator', () => {
         wrapper.instance().callOperator();
         expect(wrapper.state('displayValue')).toEqual('6.05');
     });
-
 
     it('updates displayValue to the sum of storedValue and displayValue', () => {
         wrapper.setState({ storedValue: '3' });

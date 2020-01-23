@@ -87,9 +87,9 @@ class Calculator extends Component {
             // set displayValue to '0' if displayValue is empty string
             if (displayValue === '') displayValue = '0';
         } else {
-            // replace displayValue with value if displayValue equal to '0'
+            // replace displayValue with value if displayValue equal to '0' and it does not include the dot
             // else concatenate displayValue and value
-            displayValue === '0' ? displayValue = value : displayValue += value;
+            displayValue === '0' && value!== '.' ? displayValue = value : displayValue += value;
         }
 
         this.setState({ displayValue });
