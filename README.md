@@ -4,7 +4,7 @@ This builds a simple Calculator app based on the original https://github.com/cal
 Results can be found here: https://egraumann.github.io/react-calculator/
 
 ## Changes to the original
-- colors and round corners
+- layout (colors, round corners, different division sign)
 - works with float
 - displays 0.5 instead of .5
 
