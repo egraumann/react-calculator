@@ -1,12 +1,12 @@
 # TDD React
 
-This builds a simple Calculator app created for a blog post at [testdriven.io](https://testdriven.io/blog/tdd-with-react-jest-and-enzyme-part-one/).
+This builds a simple Calculator app based on the original https://github.com/calebpollman/react-calculator. 
 Results can be found here: https://egraumann.github.io/react-calculator/
 
 ## Local Setup
 
 ```sh
-$ git clone git@github.com:calebpollman/react-calculator.git
+$ git clone git@github.com:egraumann/react-calculator.git
 ```
 
 ```sh
