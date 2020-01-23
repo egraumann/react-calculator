@@ -1,119 +1,116 @@
 import React, { Component } from 'react';
 import './Calculator.css';
-
-import Display from '../Display/Display';
+import Display from "../Display/Display";
 import Keypad from '../Keypad/Keypad';
-import './Calculator.css';
 
 class Calculator extends Component {
-  state = {
-    displayValue: '0',
-    numbers: ['9', '8', '7', '6', '5', '4', '3', '2', '1', '.', '0', 'ce'],
-    operators: ['/', 'x', '-', '+'],
-    selectedOperator: '',
-    storedValue: '',
-  };
-
-  componentWillMount = () => {
-    document.addEventListener('keydown', this.handleKeyPress);
-  };
-
-  componentWillUnmount = () => {
-    document.removeEventListener('keydown', this.handleKeyPress);
-  };
-
-  callOperator = () => {
-    let { displayValue, selectedOperator, storedValue } = this.state;
-    const updateStoredValue = displayValue;
-
-    displayValue = parseInt(displayValue, 10);
-    storedValue = parseInt(storedValue, 10);
-
-    switch (selectedOperator) {
-      case '+':
-        displayValue = storedValue + displayValue;
-        break;
-      case '-':
-        displayValue = storedValue - displayValue;
-        break;
-      case 'x':
-        displayValue = storedValue * displayValue;
-        break;
-      case '/':
-        displayValue = storedValue / displayValue;
-        break;
-      default:
-        displayValue = '0';
+    state = {
+        // value to be displayed in <Display />
+        displayValue: '0',
+        // values to be displayed in number <Keys />
+        numbers: ['9', '8', '7', '6', '5', '4', '3', '2', '1', '.', '0','ce'],
+        // values to be displayed in operator <Keys />
+        operators: ['/', 'x', '-', '+'],
+        // operator selected for math operation
+        selectedOperator: '',
+        // stored value to use for math operation
+        storedValue: '',
     }
 
-    displayValue = displayValue.toString();
-    selectedOperator = '';
-    if (displayValue === 'NaN' || displayValue === 'Infinity') displayValue = '0';
+    callOperator = () => {
+        let { displayValue, selectedOperator, storedValue } = this.state;
+        // temp variable for updating state storedValue
+        const updateStoredValue = displayValue;
 
-    this.setState({ displayValue, selectedOperator, storedValue: updateStoredValue });
-  };
+        // parse strings for operations
+        displayValue = parseFloat(displayValue);
+        storedValue = parseFloat(storedValue);
 
-  handleKeyPress = event => {
-    const { numbers, operators } = this.state;
+        // performs selected operation
+        switch (selectedOperator) {
+            case '+':
+                displayValue = storedValue + displayValue;
+                break;
+            case '-':
+                displayValue = storedValue - displayValue;
+                break;
+            case 'x':
+                displayValue = storedValue * displayValue;
+                break;
+            case '/':
+                displayValue = storedValue / displayValue;
+                break;
+            default:
+                // set displayValue to zero if no case matches
+                displayValue = '0';
+        }
 
-    if (event.key === 'Backspace') this.updateDisplay('ce');
-    if (event.key === 'Enter' || event.key === '=') this.callOperator();
+        // converts displayValue to a string
+        displayValue = displayValue.toString();
+        // reset selectedOperator
+        selectedOperator = '';
+        // check for 'NaN' or 'Infinity', if true set displayValue to '0'
+        if (displayValue === 'NaN' || displayValue === 'Infinity') displayValue = '0';
 
-    numbers.forEach(number => {
-      if (event.key === number) this.updateDisplay(number);
-    });
-
-    operators.forEach(operator => {
-      if (event.key === operator) this.setOperator(operator);
-    });
-  };
-
-  setOperator = value => {
-    let { displayValue, selectedOperator, storedValue } = this.state;
-
-    if (selectedOperator === '') {
-      storedValue = displayValue;
-      displayValue = '0';
-      selectedOperator = value;
-    } else {
-      selectedOperator = value;
+        this.setState({ displayValue, selectedOperator, storedValue: updateStoredValue });
     }
 
-    this.setState({ displayValue, selectedOperator, storedValue });
-  };
+    setOperator = value => {
+        let { displayValue, selectedOperator, storedValue } = this.state;
 
-  updateDisplay = value => {
-    let { displayValue } = this.state;
+        // check if a value is already present for selectedOperator
+        if (selectedOperator === '') {
+            // update storedValue to the value of displayValue
+            storedValue = displayValue;
+            // reset the value of displayValue to '0'
+            displayValue = '0';
+            // update the value of selectedOperator to the given value
+            selectedOperator = value;
+        } else {
+            // if selectedOperator is not an empty string
+            // update the value of selectedOperator to the given value
+            selectedOperator = value;
+        }
 
-    if (value === '.' && displayValue.includes('.')) value = '';
-
-    if (value === 'ce') {
-      displayValue = displayValue.substr(0, displayValue.length - 1);
-      if (displayValue === '') displayValue = '0';
-    } else {
-      displayValue === '0' ? (displayValue = value) : (displayValue += value);
+        this.setState({ displayValue, selectedOperator, storedValue });
     }
 
-    this.setState({ displayValue });
-  };
+    updateDisplay = value => {
+        let { displayValue } = this.state;
 
-  render() {
-    const { displayValue, numbers, operators } = this.state;
+        // prevent multiple occurences of '.'
+        if (value === '.' && displayValue.includes('.')) value = '';
 
-    return (
-      <div className="calculator-container">
-        <Display displayValue={displayValue} />
-        <Keypad
-          handleKeyPress={this.handleKeyPress}
-          operators={operators}
-          callOperator={this.callOperator}
-          numbers={numbers}
-          setOperator={this.setOperator}
-          updateDisplay={this.updateDisplay}
-        />
-      </div>
-    );
-  }
+        if (value === 'ce') {
+            // deletes last char in displayValue
+            displayValue = displayValue.substr(0, displayValue.length - 1);
+            // set displayValue to '0' if displayValue is empty string
+            if (displayValue === '') displayValue = '0';
+        } else {
+            // replace displayValue with value if displayValue equal to '0'
+            // else concatenate displayValue and value
+            displayValue === '0' ? displayValue = value : displayValue += value;
+        }
+
+        this.setState({ displayValue });
+    }
+
+    render = () => {
+        // unpack the component state by using Object Destructuring
+        const { displayValue, numbers, operators } = this.state;
+        return (
+            <div className="calculator-container">
+                <Display displayValue={displayValue}/>
+                <Keypad
+                    callOperator={this.callOperator}
+                    numbers={numbers}
+                    operators={operators}
+                    setOperator={this.setOperator}
+                    updateDisplay={this.updateDisplay}
+                />
+            </div>
+        );
+    }
 }
 
 export default Calculator;
