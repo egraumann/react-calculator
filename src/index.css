@@ -6,17 +6,17 @@
     --action-key-color: #545454;
     --action-key-color-hover: #2a2a2a;
     --calculator-background-color: #696969;
-    --display-background-color: #1d1f1f;
-    --number-key-color: #696969;
-    --number-key-color-hover: #3f3f3f;
-    --submit-key-color: #d18800;
-    --submit-key-color-hover: #aa6e00;
+    --display-background-color: #447084;
+    --number-key-color: #5d95af;
+    --number-key-color-hover: #447084;
+    --submit-key-color: #447084;
+    --submit-key-color-hover: #315463;
 
     /* font */
     --main-font: 'Orbitron', sans-serif;
 
     /* font colors */
-    --display-text-color: #23e000;
+    --display-text-color: #fff;
     --key-text-color: #d3d3d3;
 
     /* font sizes */

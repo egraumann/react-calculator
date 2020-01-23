@@ -3,8 +3,10 @@
     background: var(--display-background-color);
     display: flex;
     height: var(--display-height);
-    padding: 0 4%;
+    padding: 0% 2%;
     width: var(--display-width);
+    margin-top: 2%;
+    margin-left: 2%;
 }
 
 .display-value {
