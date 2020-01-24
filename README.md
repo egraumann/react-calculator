@@ -10,6 +10,8 @@ Results can be found here: https://egraumann.github.io/react-calculator/
 
 ## ToDo:
 - when typing in number and adding operator, I would like to keep the number in the display instead of resetting it to 0
+- adding more operators (-/+, root, etc)
+- (optional) when dividing by zero, it does nothing. Maybe show "error" or something like this?
 
 ## Local Setup
 
