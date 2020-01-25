@@ -91,6 +91,7 @@ describe('updateDisplay', () => {
     it('prevents showing only . when 0 as initial value', () => {
         wrapper.instance().updateDisplay('0');
         wrapper.instance().updateDisplay('.');
+        wrapper.instance().updateDisplay('5');
         expect(wrapper.state('displayValue')).toEqual('0.5');
     });
 
@@ -104,7 +105,7 @@ describe('updateDisplay', () => {
     it('prevents multiple instances of "." in displayValue', () => {
         wrapper.instance().updateDisplay('.');
         wrapper.instance().updateDisplay('.');
-        expect(wrapper.state('displayValue')).toEqual('.');
+        expect(wrapper.state('displayValue')).toEqual('0.');
     });
 
     it('will set displayValue to "0" if displayValue is equal to an empty string', () => {
